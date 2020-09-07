@@ -3,13 +3,13 @@ const path = require('path')
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-const config = require('./config/server-config');
+const config = require('./server/config/server-config');
 
-const db = require('./config/db');
+const db = require('./server/config/db');
 const app = express();
 
-const UsersRoute = require('./routes/UsersRoute');
-const PostsRoute = require('./routes/PostsRoute');
+const UsersRoute = require('./server/routes/UsersRoute');
+const PostsRoute = require('./server/routes/PostsRoute');
 
 app.use(cors());
 app.use(express.json());
