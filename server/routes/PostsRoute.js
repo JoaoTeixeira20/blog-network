@@ -7,7 +7,7 @@ const PostsController = require('../controllers/PostsController')
 //routes
 router.get('/:username', authenticator.authenticateToken , PostsController.getPostsByUser)
 
-router.get('/', authenticator.authenticateToken , PostsController.getPosts)
+router.get('/', PostsController.getPosts)
 
 router.post('/', authenticator.authenticateToken, PostsController.setPost)
 

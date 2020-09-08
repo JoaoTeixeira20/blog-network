@@ -16,22 +16,23 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.use('/users', UsersRoute);
-app.use('/posts', PostsRoute);
+app.use('/api/users', UsersRoute);
+app.use('/api/posts', PostsRoute);
 
 //entrypoint to the react built app
-app.get('/', (req, res) => {
-res.sendFile(path.join(__dirname, 'build', 'index.html'))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
 //start the server once the database is ready
 db.on('connected', () => {
-    app.listen(config.server_port, config.server_host, () => {
-        console.log(`server is running on ${config.server_host}:${config.server_port}`)
-    })
+  app.listen(config.server_port, config.server_host, () => {
+    console.log(`server is running on ${config.server_host}:${config.server_port}`)
+  })
 })
 
 //quits the application with an error
 db.on('error', () => {
-    process.exit(1)
+  console.error('fatal error on database, check database config parameters')
+  process.exit(1)
 })
